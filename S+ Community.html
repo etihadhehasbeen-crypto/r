@@ -1,0 +1,392 @@
+<!DOCTYPE html>
+<html lang="th">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>S+ Community | ร้านขายสกิน &amp; ไอเทม</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Kanit:wght@300;400;500;600;700&family=Playfair+Display:wght@600;700;900&display=swap" rel="stylesheet">
+<style>
+:root{
+  --gold:#c9a227;--gold-light:#e8c860;--gold-deep:#9a7b14;
+  --white:#ffffff;--cream:#faf8f3;--ink:#1a1a1a;--muted:#6b6b6b;
+  --line:#ece7da;--shadow:0 10px 40px rgba(180,150,40,.12);
+}
+*{margin:0;padding:0;box-sizing:border-box}
+html{scroll-behavior:smooth}
+body{font-family:'Kanit',sans-serif;background:var(--cream);color:var(--ink);line-height:1.6}
+.serif{font-family:'Playfair Display',serif}
+a{text-decoration:none;color:inherit}
+button{font-family:inherit;cursor:pointer;border:none}
+.gold-text{background:linear-gradient(135deg,var(--gold-deep),var(--gold-light));-webkit-background-clip:text;background-clip:text;color:transparent}
+.btn{display:inline-flex;align-items:center;justify-content:center;gap:8px;padding:12px 26px;border-radius:12px;font-weight:600;font-size:15px;transition:.25s;}
+.btn-gold{background:linear-gradient(135deg,var(--gold),var(--gold-light));color:#fff;box-shadow:0 8px 22px rgba(201,162,39,.35)}
+.btn-gold:hover{transform:translateY(-2px);box-shadow:0 12px 30px rgba(201,162,39,.5)}
+.btn-ghost{background:#fff;color:var(--ink);border:1.5px solid var(--line)}
+.btn-ghost:hover{border-color:var(--gold);color:var(--gold-deep)}
+.hidden{display:none!important}
+
+/* ===== LOGIN ===== */
+#login{min-height:100vh;display:flex;align-items:center;justify-content:center;padding:24px;
+  background:radial-gradient(circle at 20% 20%,#fff 0%,var(--cream) 60%);position:relative;overflow:hidden}
+#login::before,#login::after{content:'';position:absolute;border-radius:50%;filter:blur(80px);opacity:.5}
+#login::before{width:420px;height:420px;background:rgba(232,200,96,.4);top:-120px;right:-80px}
+#login::after{width:360px;height:360px;background:rgba(201,162,39,.25);bottom:-120px;left:-60px}
+.login-card{position:relative;z-index:2;width:100%;max-width:430px;background:rgba(255,255,255,.85);
+  backdrop-filter:blur(14px);border:1px solid rgba(201,162,39,.25);border-radius:26px;
+  padding:48px 40px;box-shadow:var(--shadow);text-align:center}
+.brand-badge{width:84px;height:84px;margin:0 auto 18px;border-radius:22px;
+  background:linear-gradient(135deg,var(--gold),var(--gold-light));display:flex;align-items:center;
+  justify-content:center;font-size:38px;font-weight:900;color:#fff;box-shadow:0 10px 24px rgba(201,162,39,.4);font-family:'Playfair Display',serif}
+.login-card h1{font-size:30px;margin-bottom:4px}
+.login-card .sub{color:var(--muted);font-size:14px;margin-bottom:30px}
+.btn-discord{width:100%;background:#5865F2;color:#fff;padding:15px;border-radius:14px;font-weight:600;
+  font-size:16px;display:flex;align-items:center;justify-content:center;gap:10px;transition:.25s}
+.btn-discord:hover{background:#4752c4;transform:translateY(-2px);box-shadow:0 10px 26px rgba(88,101,242,.4)}
+.login-note{margin-top:22px;font-size:12.5px;color:var(--muted);line-height:1.7}
+.verify-badge{display:inline-flex;align-items:center;gap:6px;background:rgba(201,162,39,.12);
+  color:var(--gold-deep);padding:6px 14px;border-radius:30px;font-size:12.5px;font-weight:500;margin-bottom:26px}
+.divider{display:flex;align-items:center;gap:12px;color:var(--muted);font-size:12px;margin:22px 0}
+.divider::before,.divider::after{content:'';flex:1;height:1px;background:var(--line)}
+
+/* ===== APP SHELL ===== */
+.topbar{position:sticky;top:0;z-index:50;background:rgba(255,255,255,.9);backdrop-filter:blur(12px);
+  border-bottom:1px solid var(--line);display:flex;align-items:center;justify-content:space-between;
+  padding:12px 28px;gap:16px}
+.logo{display:flex;align-items:center;gap:10px;font-weight:700;font-size:19px}
+.logo .mark{width:38px;height:38px;border-radius:11px;background:linear-gradient(135deg,var(--gold),var(--gold-light));
+  display:flex;align-items:center;justify-content:center;color:#fff;font-family:'Playfair Display',serif;font-weight:900}
+.nav{display:flex;gap:4px}
+.nav button{background:none;padding:9px 16px;border-radius:10px;font-size:14.5px;font-weight:500;color:var(--muted);transition:.2s}
+.nav button:hover{color:var(--ink);background:var(--cream)}
+.nav button.active{color:var(--gold-deep);background:rgba(201,162,39,.1);font-weight:600}
+.topbar-right{display:flex;align-items:center;gap:14px}
+.points-pill{display:flex;align-items:center;gap:7px;background:linear-gradient(135deg,#fff7e0,#fdeec0);
+  border:1px solid rgba(201,162,39,.3);padding:7px 15px;border-radius:30px;font-weight:600;font-size:14px;color:var(--gold-deep)}
+.avatar{width:40px;height:40px;border-radius:50%;background:linear-gradient(135deg,#5865F2,#7984f5);
+  display:flex;align-items:center;justify-content:center;color:#fff;font-weight:600;cursor:pointer}
+.menu-toggle{display:none;background:none;font-size:24px;color:var(--ink)}
+
+.view{max-width:1120px;margin:0 auto;padding:40px 24px 80px}
+.view h2{font-size:30px;margin-bottom:6px}
+.view .lead{color:var(--muted);margin-bottom:30px}
+
+/* hero */
+.hero{background:linear-gradient(135deg,#fff,#fdf6e3);border:1px solid var(--line);border-radius:24px;
+  padding:52px 44px;position:relative;overflow:hidden;box-shadow:var(--shadow);margin-bottom:40px}
+.hero::after{content:'S+';position:absolute;right:-10px;bottom:-50px;font-family:'Playfair Display',serif;
+  font-size:220px;font-weight:900;color:rgba(201,162,39,.08)}
+.hero h1{font-size:46px;line-height:1.1;margin-bottom:14px;max-width:640px;position:relative;z-index:2}
+.hero p{color:var(--muted);font-size:17px;max-width:520px;margin-bottom:26px;position:relative;z-index:2}
+.hero .cta{display:flex;gap:12px;position:relative;z-index:2;flex-wrap:wrap}
+.stats{display:grid;grid-template-columns:repeat(3,1fr);gap:18px;margin-bottom:14px}
+.stat{background:#fff;border:1px solid var(--line);border-radius:18px;padding:24px;text-align:center}
+.stat .n{font-size:30px;font-weight:700}
+.stat .l{color:var(--muted);font-size:13.5px}
+
+/* grid cards */
+.grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(230px,1fr));gap:22px}
+.card{background:#fff;border:1px solid var(--line);border-radius:20px;overflow:hidden;transition:.25s;display:flex;flex-direction:column}
+.card:hover{transform:translateY(-5px);box-shadow:var(--shadow);border-color:rgba(201,162,39,.4)}
+.card .thumb{height:150px;display:flex;align-items:center;justify-content:center;font-size:54px;
+  background:linear-gradient(135deg,#f6efd8,#fff);border-bottom:1px solid var(--line)}
+.card .body{padding:18px;display:flex;flex-direction:column;gap:10px;flex:1}
+.card .tag{align-self:flex-start;font-size:11px;font-weight:600;padding:3px 10px;border-radius:20px;
+  background:rgba(201,162,39,.12);color:var(--gold-deep)}
+.card .name{font-weight:600;font-size:16px}
+.card .desc{font-size:13px;color:var(--muted);flex:1}
+.card .foot{display:flex;align-items:center;justify-content:space-between;margin-top:4px}
+.card .price{font-weight:700;color:var(--gold-deep);display:flex;align-items:center;gap:5px}
+.card .buy{background:var(--ink);color:#fff;padding:8px 16px;border-radius:10px;font-size:13.5px;font-weight:600;transition:.2s}
+.card .buy:hover{background:var(--gold-deep)}
+
+/* topup packages */
+.pkg-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(220px,1fr));gap:20px}
+.pkg{background:#fff;border:1.5px solid var(--line);border-radius:20px;padding:26px 22px;text-align:center;transition:.25s;position:relative}
+.pkg:hover{border-color:var(--gold);transform:translateY(-4px);box-shadow:var(--shadow)}
+.pkg.hot{border-color:var(--gold);background:linear-gradient(135deg,#fffdf5,#fdf4da)}
+.pkg .ribbon{position:absolute;top:-11px;left:50%;transform:translateX(-50%);background:linear-gradient(135deg,var(--gold),var(--gold-light));
+  color:#fff;font-size:11px;font-weight:600;padding:4px 14px;border-radius:20px}
+.pkg .pts{font-size:34px;font-weight:700;color:var(--gold-deep)}
+.pkg .pts small{font-size:14px;color:var(--muted);font-weight:400}
+.pkg .bonus{font-size:12.5px;color:#2e9e5b;font-weight:500;margin:4px 0 14px}
+.pkg .thb{font-size:22px;font-weight:600;margin-bottom:16px}
+
+/* methods */
+.methods{display:flex;gap:12px;flex-wrap:wrap;margin-top:18px}
+.method{flex:1;min-width:150px;background:#fff;border:1px solid var(--line);border-radius:14px;padding:16px;
+  display:flex;align-items:center;gap:12px;font-weight:500;font-size:14px}
+.method .ic{font-size:24px}
+
+/* footer */
+.footer{background:var(--ink);color:#cfcfcf;padding:40px 24px;text-align:center}
+.footer .fb{width:52px;height:52px;border-radius:14px;background:linear-gradient(135deg,var(--gold),var(--gold-light));
+  display:inline-flex;align-items:center;justify-content:center;color:#fff;font-family:'Playfair Display',serif;font-weight:900;font-size:24px;margin-bottom:14px}
+.footer a.dc{display:inline-flex;align-items:center;gap:8px;background:#5865F2;color:#fff;padding:11px 22px;
+  border-radius:12px;font-weight:600;margin-top:8px;transition:.2s}
+.footer a.dc:hover{background:#4752c4}
+.footer .cc{margin-top:22px;font-size:12.5px;color:#777}
+
+/* toast */
+#toast{position:fixed;bottom:28px;left:50%;transform:translateX(-50%) translateY(120px);background:var(--ink);
+  color:#fff;padding:14px 26px;border-radius:14px;font-weight:500;font-size:14.5px;z-index:999;transition:.35s;box-shadow:0 10px 30px rgba(0,0,0,.3);opacity:0}
+#toast.show{transform:translateX(-50%) translateY(0);opacity:1}
+#toast.ok{background:linear-gradient(135deg,var(--gold-deep),var(--gold))}
+
+@media(max-width:760px){
+  .nav{display:none;position:absolute;top:64px;left:0;right:0;flex-direction:column;background:#fff;
+    border-bottom:1px solid var(--line);padding:10px}
+  .nav.open{display:flex}
+  .menu-toggle{display:block}
+  .hero h1{font-size:32px}.hero{padding:36px 24px}
+  .stats{grid-template-columns:1fr}
+  .points-pill span.lbl{display:none}
+}
+</style>
+</head>
+<body>
+
+<!-- ================= LOGIN SCREEN ================= -->
+<section id="login">
+  <div class="login-card">
+    <div class="brand-badge">S+</div>
+    <h1 class="serif">S+ Community</h1>
+    <p class="sub">ร้านขายสกิน &amp; ไอเทมระดับพรีเมียม</p>
+    <div class="verify-badge">✓ ยืนยันตัวตนด้วย Discord เท่านั้น</div>
+    <button class="btn-discord" onclick="loginDiscord()">
+      <svg width="22" height="22" viewBox="0 0 24 24" fill="currentColor"><path d="M20.3 4.4A19.8 19.8 0 0 0 15.4 3l-.3.5c1.7.4 2.8 1 3.9 1.7a13.2 13.2 0 0 0-11.9 0C8.1 4.5 9.3 3.9 11 3.5L10.6 3C8.8 3.3 7.1 3.8 5.7 4.4 2.6 9 1.8 13.5 2.2 17.9A19.9 19.9 0 0 0 8.1 21l.4-.6c-1-.3-1.9-.7-2.7-1.2l.6-.4c3.5 1.6 7.8 1.6 11.3 0l.6.4c-.8.5-1.7.9-2.7 1.2l.4.6a19.9 19.9 0 0 0 6-3.1c.5-5.1-.8-9.6-3.3-13.5ZM9 15.3c-.9 0-1.7-.8-1.7-1.9S8.1 11.5 9 11.5s1.7.8 1.7 1.9S9.9 15.3 9 15.3Zm6 0c-.9 0-1.7-.8-1.7-1.9s.8-1.9 1.7-1.9 1.7.8 1.7 1.9-.8 1.9-1.7 1.9Z"/></svg>
+      เข้าสู่ระบบด้วย Discord
+    </button>
+    <div class="divider">เข้าร่วมคอมมิวนิตี้ของเรา</div>
+    <a class="btn btn-ghost" style="width:100%" href="https://discord.gg/ghNqGVgrYg" target="_blank" rel="noopener">🔗 เข้าร่วม Discord Server</a>
+    <p class="login-note">การสมัครสมาชิกรองรับเฉพาะบัญชี Discord เท่านั้น เพื่อความปลอดภัยและป้องกันการสวมรอย</p>
+  </div>
+</section>
+
+<!-- ================= APP ================= -->
+<div id="app" class="hidden">
+  <header class="topbar">
+    <div class="logo"><span class="mark">S+</span> S+ Community</div>
+    <nav class="nav" id="nav">
+      <button data-view="home" class="active" onclick="go('home')">หน้าแรก</button>
+      <button data-view="store" onclick="go('store')">ร้านค้า</button>
+      <button data-view="topup" onclick="go('topup')">เติมเงิน</button>
+    </nav>
+    <div class="topbar-right">
+      <div class="points-pill"><span>💰</span><span class="lbl">พ้อยท์</span> <strong id="ptsTop">0</strong></div>
+      <div class="avatar" id="avatar" title="ออกจากระบบ" onclick="logout()">U</div>
+      <button class="menu-toggle" onclick="document.getElementById('nav').classList.toggle('open')">☰</button>
+    </div>
+  </header>
+
+  <main id="views"></main>
+
+  <footer class="footer">
+    <div class="fb">S+</div>
+    <div class="serif" style="font-size:20px;color:#fff">S+ Community</div>
+    <p style="max-width:420px;margin:8px auto 4px;font-size:13.5px">ร้านขายสกินและไอเทมในเกม ยืนยันตัวตนด้วย Discord ปลอดภัย ไว้ใจ</p>
+    <a class="dc" href="https://discord.gg/ghNqGVgrYg" target="_blank" rel="noopener">💬 เข้าร่วม Discord</a>
+    <div class="cc">© 2026 S+ Community — All rights reserved.</div>
+  </footer>
+</div>
+
+<div id="toast"></div>
+
+<script>
+/* ============ S+ Community — Front-end Prototype ============
+   หมายเหตุ: การยืนยัน Discord และการชำระเงินในเดโมนี้เป็นการจำลอง (client-side)
+   การใช้งานจริงต้องเชื่อมต่อ Discord OAuth2 + ระบบชำระเงินฝั่ง backend
+============================================================= */
+
+const KEY = 'splus_state_v1';
+let state = loadState();
+
+function loadState(){
+  try{ return JSON.parse(localStorage.getItem(KEY)) || null; }catch(e){ return null; }
+}
+function saveState(){ localStorage.setItem(KEY, JSON.stringify(state)); }
+
+/* ---------- ข้อมูลสินค้า (สกิน / ไอเทม) ---------- */
+const PRODUCTS = [
+  {id:'p1', icon:'🗡️', tag:'สกินหายาก', name:'Dragon Blade Skin', desc:'สกินดาบมังกรเรืองแสง เอฟเฟกต์พิเศษ', price:1200},
+  {id:'p2', icon:'🔫', tag:'ยอดนิยม', name:'Golden AK Skin', desc:'ลายทองสุดปรีเมียม พร้อมลายสังหาร', price:950},
+  {id:'p3', icon:'🦠', tag:'ไอเทมเกม', name:'Virus Pack (ไวรัส)', desc:'ไอเทมพิเศษในเกม เพิ่มความสามารถในการเล่น', price:450},
+  {id:'p4', icon:'🎩', tag:'เครื่องแต่ง', name:'VIP Hat', desc:'หมวก VIP สุดเท่ โชว์สถานะในเกม', price:300},
+  {id:'p5', icon:'🐾', tag:'เพ็ต', name:'Mythic Pet', desc:'สัตว์เลี้ยงระดับตำนาน ติดตามตัวละคร', price:800},
+  {id:'p6', icon:'⚔️', tag:'เซ็ต', name:'Starter Combat Set', desc:'เซ็ตเริ่มต้นสำหรับผู้เล่นใหม่', price:600},
+  {id:'p7', icon:'💎', tag:'ไอเทมหายาก', name:'Diamond Aura', desc:'เอฟเฟกต์แสงรอบตัวละคร หายากสุด', price:1500},
+  {id:'p8', icon:'🚀', tag:'บูสเตอร์', name:'XP Booster x2', desc:'เร่งค่าประสบการณ์ 2 เท่า 7 วัน', price:250}
+];
+
+/* ---------- แพ็กเกจเติมเงิน ---------- */
+const PACKAGES = [
+  {thb:50,   pts:500,   bonus:0},
+  {thb:100,  pts:1050,  bonus:5},
+  {thb:300,  pts:3300,  bonus:10, hot:true},
+  {thb:500,  pts:5750,  bonus:15},
+  {thb:1000, pts:12000, bonus:20},
+  {thb:2000, pts:25000, bonus:25}
+];
+
+const fmt = n => n.toLocaleString('th-TH');
+
+/* ============ AUTH ============ */
+function loginDiscord(){
+  const names = ['NightWolf','ShadowKing','DragonX','AcePlayer','MythicGG','StarLord'];
+  const u = names[Math.floor(Math.random()*names.length)] + '#' + (1000+Math.floor(Math.random()*8999));
+  if(!state){ state = {user:u, points:0, owned:[], joined:Date.now()}; }
+  else { state.user = u; }
+  saveState();
+  enterApp();
+  toast('✓ ยืนยันตัวตนสำเร็จ ยินดีต้อนรับ '+u, true);
+}
+function logout(){
+  if(confirm('ออกจากระบบ?')){
+    document.getElementById('app').classList.add('hidden');
+    document.getElementById('login').classList.remove('hidden');
+    window.scrollTo(0,0);
+  }
+}
+function enterApp(){
+  document.getElementById('login').classList.add('hidden');
+  document.getElementById('app').classList.remove('hidden');
+  document.getElementById('avatar').textContent = state.user[0].toUpperCase();
+  document.getElementById('avatar').title = state.user + ' — คลิกเพื่อออกจากระบบ';
+  refreshPoints();
+  go('home');
+  window.scrollTo(0,0);
+}
+function refreshPoints(){ document.getElementById('ptsTop').textContent = fmt(state.points); }
+
+/* ============ ROUTER ============ */
+function go(view){
+  document.querySelectorAll('.nav button').forEach(b=>b.classList.toggle('active', b.dataset.view===view));
+  document.getElementById('nav').classList.remove('open');
+  const V = document.getElementById('views');
+  if(view==='home') V.innerHTML = renderHome();
+  else if(view==='store') V.innerHTML = renderStore();
+  else if(view==='topup') V.innerHTML = renderTopup();
+  window.scrollTo({top:0,behavior:'smooth'});
+}
+
+/* ============ VIEWS ============ */
+function renderHome(){
+  const ownedCount = state.owned.length;
+  return `
+  <div class="view">
+    <section class="hero">
+      <h1 class="serif">ยินดีต้อนรับสู่ <span class="gold-text">S+ Community</span></h1>
+      <p>ร้านขายสกินและไอเทมในเกมคุณภาพ เติมพ้อยท์ง่าย ได้ของไว ปลอดภัย 100% ยืนยันตัวตนด้วย Discord</p>
+      <div class="cta">
+        <button class="btn btn-gold" onclick="go('store')">🛒 เข้าร้านค้า</button>
+        <button class="btn btn-ghost" onclick="go('topup')">💰 เติมพ้อยท์</button>
+      </div>
+    </section>
+    <div class="stats">
+      <div class="stat"><div class="n gold-text">${fmt(state.points)}</div><div class="l">พ้อยท์คงเหลือ</div></div>
+      <div class="stat"><div class="n gold-text">${ownedCount}</div><div class="l">ไอเทมที่เป็นเจ้าของ</div></div>
+      <div class="stat"><div class="n gold-text">${PRODUCTS.length}</div><div class="l">สินค้าในร้าน</div></div>
+    </div>
+    <h2 class="serif" style="margin-top:10px">✨ สินค้าแนะนำ</h2>
+    <p class="lead">ไอเทมยอดฮิตที่ชาวคอมมูนิตี้เลือกมากที่สุด</p>
+    <div class="grid">${PRODUCTS.slice(0,4).map(cardHTML).join('')}</div>
+  </div>`;
+}
+
+function cardHTML(p){
+  const owned = state.owned.includes(p.id);
+  return `
+  <div class="card">
+    <div class="thumb">${p.icon}</div>
+    <div class="body">
+      <span class="tag">${p.tag}</span>
+      <div class="name">${p.name}</div>
+      <div class="desc">${p.desc}</div>
+      <div class="foot">
+        <div class="price">💰 ${fmt(p.price)}</div>
+        ${owned
+          ? `<span style="color:#2e9e5b;font-weight:600;font-size:13px">✓ มีแล้ว</span>`
+          : `<button class="buy" onclick="buy('${p.id}')">ซื้อ</button>`}
+      </div>
+    </div>
+  </div>`;
+}
+
+function renderStore(){
+  return `
+  <div class="view">
+    <h2 class="serif">🏪 ร้านค้า</h2>
+    <p class="lead">เลือกซื้อสกิน ไอเทม และไวรัสด้วยพ้อยท์ — ของเข้ากระเป๋าทันทีหลังชำระ</p>
+    <div class="grid">${PRODUCTS.map(cardHTML).join('')}</div>
+  </div>`;
+}
+
+function renderTopup(){
+  return `
+  <div class="view">
+    <h2 class="serif">💰 เติมเงิน / เติมพ้อยท์</h2>
+    <p class="lead">เลือกแพ็กเกจด้านล่าง ยิ่งเติมมากยิ่งได้โบนัสพ้อยท์เยอะ</p>
+    <div class="pkg-grid">
+      ${PACKAGES.map(k=>`
+        <div class="pkg ${k.hot?'hot':''}">
+          ${k.hot?'<div class="ribbon">ยอดนิยม</div>':''}
+          <div class="pts">${fmt(k.pts)} <small>พ้อยท์</small></div>
+          ${k.bonus?`<div class="bonus">+ โบนัส ${k.bonus}%</div>`:'<div class="bonus" style="color:#aaa">ราคามาตรฐาน</div>'}
+          <div class="thb">฿${fmt(k.thb)}</div>
+          <button class="btn btn-gold" style="width:100%" onclick="topup(${k.pts},${k.thb})">เติมเลย</button>
+        </div>`).join('')}
+    </div>
+    <h2 class="serif" style="margin-top:44px;font-size:22px">ช่องทางการชำระเงิน</h2>
+    <div class="methods">
+      <div class="method"><span class="ic">🏦</span> โอนเงินธนาคาร</div>
+      <div class="method"><span class="ic">📱</span> PromptPay / QR</div>
+      <div class="method"><span class="ic">💳</span> บัตรเครดิต / เดบิต</div>
+      <div class="method"><span class="ic">🎟️</span> บัตรเติมเงิน (TrueMoney)</div>
+    </div>
+  </div>`;
+}
+
+/* ============ ACTIONS ============ */
+function buy(id){
+  const p = PRODUCTS.find(x=>x.id===id);
+  if(!p) return;
+  if(state.owned.includes(id)){ toast('คุณมีไอเทมนี้แล้ว'); return; }
+  if(state.points < p.price){
+    toast('✗ พ้อยท์ไม่พอ — กรุณาเติมเงินก่อน');
+    setTimeout(()=>go('topup'),900);
+    return;
+  }
+  if(!confirm(`ยืนยันการซื้อ "${p.name}" ราคา ${fmt(p.price)} พ้อยท์?`)) return;
+  state.points -= p.price;
+  state.owned.push(id);
+  saveState();
+  refreshPoints();
+  go('store');
+  toast('✓ ซื้อ '+p.name+' สำเร็จ! ไอเทมถูกส่งเข้าบัญชีแล้ว', true);
+}
+
+function topup(pts, thb){
+  if(!confirm(`ยืนยันการเติมเงิน ฿${fmt(thb)} รับ ${fmt(pts)} พ้อยท์?\n(เดโม: ระบบจำลองการชำระเงิน)`)) return;
+  state.points += pts;
+  saveState();
+  refreshPoints();
+  toast('✓ เติมพ้อยท์สำเร็จ +'+fmt(pts)+' พ้อยท์', true);
+  go('home');
+}
+
+/* ============ TOAST ============ */
+let toastT;
+function toast(msg, ok){
+  const t = document.getElementById('toast');
+  t.textContent = msg;
+  t.className = 'show' + (ok?' ok':'');
+  clearTimeout(toastT);
+  toastT = setTimeout(()=>t.className='', 2600);
+}
+
+/* ============ INIT ============ */
+if(state && state.user){ enterApp(); }
+
+</script>
+</body>
+</html>
